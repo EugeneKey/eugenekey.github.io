@@ -1,16 +1,16 @@
 # Site settings
-title: Lorem Ipsum - Web Developer
-description: "A blog about lorem ipsum ..."
+title: EugeneKey - Full Stack Ruby on Rails Developer
+description: "A blog about web development ..."
 baseurl: "" # for test: remove string '/space-jekyll-template' to ''
-url: "http://eugenekey.github.io" # for test: remove string 'http://victorvoid.github.io' to '' but in production: 'https://yourusername.githu.io'
+url: "https://eugenekey.github.io"
 # User settings
-username: Eugene Key
-user_title: Lorem Ipsum - FrontEnd
+username: Eugene Koniaev
+user_title: Full Stack Ruby on Rails Developer
 email: evgeny.konyaev@gmail.com
-twitter_username: loremipsum
+twitter_username: Visioner17
 github_username:  EugeneKey
-gplus_username:  loremipsum
-disqus_username: loremipsum
+gplus_username:  109663532513563184207
+disqus_username: evgeny.konyaev@gmail.com
 
 # Build settings
 markdown: kramdown
@@ -29,21 +29,121 @@ compress_html:
 links:
   - title: home
     url: /
+  - title: my project
+    url: /project
   - title: my posts
     url: /posts
   - title: series
     url: /series
   - title: tags
     url: /tags
-  - title: about me
-    url: /about
 # projects in header index
 projects:
-  - name: asciilang
-    url: https://github.com/victorvoid/asciilang
-  - name: vim-frontend
-    url: https://github.com/victorvoid/vim-frontend
-  - name: generator-capybara
-    url: https://github.com/victorvoid/generator-capybara 
+  - name: QnA - simple Stack Overflow
+    anchor: qna
+    url: https://github.com/EugeneKey/QnA
+    description: "Demo project on Ruby on Rails. This app based on main idea of stackowerflow: people can ask questions and create answers for them, created for lerning how some gems and technologies works."
+    livedemo: http://qna.evolan.net
+    back: [ Ruby on Rails 4.2.8, PostgreSQL, Redis, Shpinx, Puma, Sidekiq ]
+    front: [ Bootstrap, jQuery, CoffeeScript, Push technology (Pub/Sub), SCSS, Slim ]
+    technologies: [
+    "Test-Driven Development (more than 400 Rspec tests examples written before code)",
+    Websockets (new records appears on page without reload for all users through private pub),
+    Ajax (actions mostly works without reload),
+    RestAPI,
+    "Omniauth: twitter, facebook",
+    Background Jobs,
+    File Upload
+    ]
+    gems: [
+            rails 4.2.8,
+            turbolinks,
+            coocon,
+            will_paginate,
+            carrierwave,
+            remotipart,
+            pg,
+            redis-rails,
+            thinking-sphinx,
+            puma,
+            thin,
+            unicorn,
+            passenger,
+            private_pub,
+            devise,
+            omniauth-facebook,
+            omniauth-twitter,
+            cancancan,
+            active_model_serializers,
+            doorkeeper,
+            oj_mimic_json,
+            sidekiq,
+            whenever,
+            responders,
+            capistrano,
+            factory_girl_rails,
+            rspec-rails,
+            rubocop,
+            capybara,
+            shoulda-matchers
+          ]
+  - name: GoogleTasks - React SPA with MaterialUI
+    anchor: googletask
+    url: https://github.com/EugeneKey/ReactRedux-GoogleTasks-MaterialUI
+    description: Demo project on React with Redux uses Google API for authentication and Google Task API for creating tasks.
+    livedemo: https://eugenekey.github.io/ReactRedux-GoogleTasks-MaterialUI
+    technologies: [
+    SinglePage Application,
+    Google API,
+    Redux
+    ]
+    back: [Google API, NodeJS, Webpack]
+    front: [React, JavaScript with Babel ES6, Less, MaterialUI]
+    packages: [
+                react 15.4.2,
+                less,
+                material-ui,
+                moment,
+                react-redux,
+                react-router,
+                react-router-redux,
+                redux,
+                redux-thunk,
+                babel-preset-es2015,
+                eslint,
+                redux-devtools,
+                webpack,
+                webpack-dev-server
+              ]
+  - name: Notes - React SPA with MongoDB
+    anchor: notesmongo
+    url: https://github.com/EugeneKey/ReactRedux-Notes-Mongo
+    description: Demo project on React with Redux uses Mongo DB and NodeJS Express server.
+    livedemo: https://eugenekey.github.io/ReactRedux-Notes-Mongo
+    technologies: [
+    SinglePage Application,
+    Redux]
+    back: [NodeJS, Express server, Mongo, Webpack]
+    front: [React, JavaScript with Babel ES6, Less, jQuery, Masonry component]
+    packages: [
+                react 15.4.2,
+                axios,
+                cors,
+                express,
+                jquery,
+                less,
+                mongoose,
+                react-masonry-component,
+                react-redux,
+                react-router,
+                react-router-redux,
+                redux,
+                redux-thunk,
+                babel-preset-es2015,
+                eslint,
+                redux-devtools,
+                webpack,
+                webpack-dev-server
+              ]
 # exclude my node related stuff
 exclude: ['package.json', 'src', 'node_modules']

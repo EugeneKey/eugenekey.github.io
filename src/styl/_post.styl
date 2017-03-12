@@ -1,5 +1,5 @@
 .post
-    +above(rem(1450px))
+    +above(rem(1200px))
         margin-left: 347px
     h1, h2, h3
         &:before
@@ -9,9 +9,10 @@
     h1
         text-align center
         margin 0
+        color main
         font-size rem(30px)
         +above(cut)
-            font-size rem(40px)
+            font-size rem(45px)
         &:before
             content "#"
             color main
@@ -28,25 +29,28 @@
         max-width 100%
         margin rem(30px) auto
         display block
-    p, h1, h2, h3, h4,ul,ol, .tags, iframe
+    p, h1, h2, h3, h4,ul,ol, .tags, iframe, div div
         max-width rem(800px)
         padding 0 rem(20px)
         margin 0 auto rem(30px)
-        mainFont(300)
+        mainFont(400)
         font-size rem(18px)
-        line-height 2
+        line-height 1.5
         letter-spacing 0.01rem
         +above(cut)
             font-size rem(20px)
     p,li
         color texts
         code
-            color colorcode
+            color solRed
+            background-color solBase2
+            border 1px solid #e1e1e8
+            word-wrap break-word
     a
         mainFont(300)
-        color main
+        color solCyan
         text-decoration none
-        border-bottom 2px solid main
+        border-bottom 2px solid solCyan
         &:hover
             background-color mainHover
     iframe
@@ -59,23 +63,33 @@
     h1
         font-size rem(30px)
         line-height 1.4
+        color main
         +above(cut)
             font-size rem(45px)
     h2
         font-size rem(22px)
         line-height 1.4
+        color solBase3
+        background solCyan
         &:before
             content '##'
+            color solBase3
             font-size rem(25px)
         +above(cut)
-            font-size rem(35px)
+            font-size rem(28px)
+            margin-left 0
+            padding-left 130px
+            box-sizing content-box
     h3
-        font-size rem(18px)
+        font-size rem(16px)
         line-height 1.4
+        margin-bottom 7px
         +above(cut)
-            font-size rem(25px)
+            font-size rem(24px)
     ul,ol
-        padding-left rem(40px)
+        padding-left rem(60px)
+        // +below(cut)
+        //     padding-left rem(10px)
     ul.post-list
         padding 0
         +below(cut)

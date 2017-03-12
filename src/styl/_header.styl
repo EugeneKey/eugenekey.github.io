@@ -1,15 +1,46 @@
 html,
 body
 	height 100%
+	background solBase3
 
 
 $bg
 	background main
-	height 100%
-	.content
-		width 95%
-		align(both)
+	// height 100%
+	.info
+		color white
+		width 100%
 		text-align center
+		height 500px
+		background-image url(../img/bg.jpg)
+		background-attachment fixed
+		background-position center top
+		background-repeat no-repeat
+		background-size 100% 600px
+		-moz-background-size 100% 539px
+		-webkit-background-size 100% 539px
+		-o-background-size 100% 539px
+	.skills
+		background solBase3
+		.tech-icons
+			display flex
+			justify-content space-around
+			flex-wrap wrap
+			max-width 1100px
+			margin 0 auto
+			padding 0
+			text-align center
+			img
+				height 50px
+			p
+				text-align center
+				color solBase02
+			span
+				text-align center
+				height 200px
+				width 200px
+	.content
+		padding-bottom 60px
 
 // Header home
 .header-site
@@ -18,19 +49,32 @@ $bg
 		margin 0
 		list-style-type none
 	.person
+		padding-top 50px
 		img
 			size(130, 130)
 			border-radius 100%
-			margin-bottom 80px
+	.about
+		color #fdf6e3
+		max-width 50rem
+		padding 0 1.25rem
+		margin 0 auto 1.875rem
+		font-family 'Open Sans', sans-serif
+		font-weight 300
+		font-style normal
+		font-size 1.125rem
+		line-height 1.5
+		letter-spacing 0.01rem
 	.recent
+		padding 15px 0
 		+below(320px)
 			&:last-child
 				display none
-		center(450px)
-			
+		center(600px)
+
 		p
-			text-align left
-			color white
+			text-align: left
+			color solCyan
+			font-size rem(20px)
 		a
 			text-decoration none
 			h2
@@ -38,34 +82,53 @@ $bg
 				margin 0
 				font-weight 300
 				font-size rem(17px)
-				border-bottom 1px solid rgb(135, 116, 169)
+				border-bottom 1px solid solGreen
+				color solBase2
 				&:hover
-					background rgba(135,116,169,0.42)
+					background solGreen
 	h1,h2
-		color: sec
+		//color: sec
 		text-align center
+		.title-normal
+			font-weight normal
+		.title-small
+			font-weight normal
+			font-size 15pt
+
 	.site-title
 		font-size rem(30px)
 		line-height 1
-		margin-top -80px
 		display block
 		letter-spacing 9px
 		+above(cut)
-			letter-spacing 16px
+			letter-spacing 9px
 			margin-bottom 0
-			font-size rem(20px)
+			margin-top 10px
+			font-size rem(30px)
 	.site-description
 		font-size rem(20px)
 		display block
 		margin rem(30px) 0
 		+above(cut)
 			font-size rem(40px)
+	.title
+		font-family 'Open Sans', sans-serif
+		font-weight 400
+		text-align center
+		padding-top 50px
+		padding-bottom 70px
+		margin 0
+	.gray
+		color solBase00
+	.sol
+		color solBase3
+		padding-bottom 50px
 
 // Header Post
 .header-post
 	@extends $bg
 	height 62px
-	+above(rem(1450px))
+	+above(rem(1200px))
 		background transparent
 		#open
 			position fixed
@@ -75,7 +138,7 @@ $bg
 		padding-top 23px
 		text-align center
 		color sec
-		
+
 //Header Page
 .page-header
 	@extends $bg

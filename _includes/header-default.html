@@ -1,12 +1,14 @@
 <header class="header-site" role="banner">
-    <div class="content">
+    <div class="info">
 
         <div class="person">
-            <img alt="My photo" src="https://68.media.tumblr.com/93f384858e9273d5b980b418e2f2f4d5/tumblr_o5i2aybLJG1uapsfmo2_250.png">
+            <img alt="My photo" src="assets/img/ava.jpg">
         </div>
 
         <h1>
-            <span class="site-title">[{{site.username}}]</span>
+            <span class="title-normal">Hi, I am</span>
+            <span class="site-title">{{site.username}}</span>
+            <span class="title-small">Full Stack Ruby on Rails Developer, and Technology Enthusiast</span>
         </h1>
 
         <div class="icons-home">
@@ -14,13 +16,13 @@
                 <svg class="icon icon-email"><use xlink:href="#icon-email"></use></svg>
             </a>
 
-            <a aria-label="My Twitter" title="Follow me on Twitter" target="_blank" href="https://twitter.com/{{site.twitter_username}}">
+<!--             <a aria-label="My Twitter" title="Follow me on Twitter" target="_blank" href="https://twitter.com/{{site.twitter_username}}">
                 <svg class="icon icon-twitter"><use xlink:href="#icon-twitter"></use></svg>
             </a>
 
-            <a aria-label="My Google Plus" title="Show my feed" target="_blank" href="https://plus.google.com/u/0/+{{site.gplus_username}}/posts">
+            <a aria-label="My Google Plus" title="Show my feed" target="_blank" href="https://plus.google.com/u/0/{{site.gplus_username}}/posts">
                 <svg class="icon icon-google-plus"><use xlink:href="#icon-google-plus"></use></svg>
-            </a>
+            </a> -->
 
             <a aria-label="My Github" title="Show my projetcts" target="_blank" href="https://github.com/{{site.github_username}}">
                 <svg class="icon icon-github-alt"><use xlink:href="#icon-github-alt"></use></svg>
@@ -31,8 +33,54 @@
             </a>
         </div>
 
+    </div>
+    <div class="skills">
+        <span class="site-title title gray">{ Skills }</span>
+        <div class="tech-icons">
+            <span>
+                <img src="assets/img/logo/rails-logo.svg" alt="Ruby on Rails">
+                <p>Ruby on Rails</p>
+            </span>
+            <span>
+                <img src="assets/img/logo/js.png" alt="JavaScript">
+                <p>JavaSript</p>
+            </span>
+            <span>
+                <img style="background: #333;" src="assets/img/logo/node.svg" alt="Node.js">
+                <p>Node.js</p>
+            </span>
+            <span>
+                <img src="assets/img/logo/react.png" alt="React">
+                <p>React</p>
+            </span>
+        </div>
+    </div>
+        <div class="about">
+            <span class="site-title title sol">{ About me }</span>
+            <p>I've been working with Ruby on Rails for two years. Previous to I worked as a system engineer and programmer. Thereby I have a rich experience in configuring various server systems based on Linux and other OS, and excellent skills of troubleshooting.</p>
+
+            <p>I strive to become a good fullstack developer on Ruby on Rails. Now I'm learning at a deep level the construction of backend interfaces on RoR.</p>
+
+            <p>I have knowledge and practical experience in the field of Test-driven development and Behaviour-driven development, Scrum methodology, application deployment methods on different platform, and team work with GitHub and Agile-tracker.</p>
+
+            <p>In addition, I'm interested of frontend development, I use in the work of React, along with Redux / Flux. Developed various types of applications: client SPA or universal (isomorphic) with Express. I know HTML / CSS / JS with the syntax of ES6 / ES7, CoffeeScript.</p>
+
+            <p>I like to learn new technologies and apply the best practices in the field of web development.</p>
+        </div>
+    <div class="content">
         <ul class="recent">
-            <p>Recent posts:</p>
+            <p>My recent projects:</p>
+             {% for project in site.projects limit:3%}
+                <li>
+                    <a title="Show my recent project" href="{{ site.url }}/project/#{{ project.anchor }}">
+                        <h2 class="post-title" itemprop="name">{{ project.name }}</h2>
+                    </a>
+                </li>
+              {% endfor %}
+        </ul>
+
+        <ul class="recent">
+            <p>My recent posts:</p>
              {% for post in site.posts limit:3%}
                 <li>
                     <a title="Will take a my recent post" href="{{ post.url | prepend: site.baseurl }}">
@@ -41,18 +89,6 @@
                 </li>
               {% endfor %}
         </ul>
-
-        <ul class="recent">
-            <p>Recent projects:</p>
-             {% for project in site.projects limit:3%}
-                <li>
-                    <a title="Show my recent project" href="{{ project.url}}">
-                        <h2 class="post-title" itemprop="name">{{ project.name }}</h2>
-                    </a>
-                </li>
-              {% endfor %}
-        </ul>
-
     </div>
     {% include menu-search.html %}
 </header>
