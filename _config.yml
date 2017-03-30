@@ -16,6 +16,8 @@ disqus_username: eugenekey
 markdown: kramdown
 highlighter: rouge
 permalink: /:title/
+gems:
+  - jekyll-gist
 
 
 # html minify

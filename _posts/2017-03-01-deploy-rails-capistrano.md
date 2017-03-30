@@ -25,7 +25,7 @@ categories:
 
 На 6 шаге в **Configure Security Group** можно сразу задать правила для доступа, например открываем наружу 80 или 443 порт, а доступ по SSH на 22 порт разрешаем только себе, заодно для себя можно открыть доступ к порту 2812, его использует веб-интерфейс сервиса <code>monit</code> который мы будем использовать для управления сервисами.
 
-Жмем кнопку **Review and Launch** проверяем конфигурацию и жмем **Launch** появится вопрос о создании или успользовании существующей пары ключей, если ключа нет, создаем новый и скачиваем его.
+Жмем кнопку **Review and Launch** проверяем конфигурацию и жмем **Launch** появится вопрос о создании или использовании существующей пары ключей, если ключа нет, создаем новый и скачиваем его.
 
 Завершаем создание нажатием на кнопку **Launch Instance**
 
@@ -37,14 +37,14 @@ categories:
 
 <code>ssh -i /path/my-key-pair.pem ec2-user@ec2-198-51-100-1.compute-1.amazonaws.com</code>
 
-По умолчанию используется пользователь <code>ubuntu</code>, его и будем использовать для деплоя.
+По умолчанию мы работаем под пользователем <code>ubuntu</code>, его и будем использовать для деплоя.
 
 ## 2. Настраиваем сервер
 
 
 Настраиваем сервер с помощью скрипта или вручную:
 
-{% highlight bash %}
+{% highlight shell %}
 
 #!/bin/bash
 
@@ -111,13 +111,13 @@ sysctl --system
 apt-get clean
 apt-get update && apt-get upgrade
 
-apt-get install -y coreutils htop monit unzip wget curl mc vim zsh git-core
+apt-get install -y coreutils htop monit unzip wget curl mc vim zsh tmux git-core
 
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 # REQUIREMENTS LIBS
 
-apt install libmysqlclient-dev libpq-dev
+apt-get install libmysqlclient-dev libpq-dev
 
 # IMAGE MAGICK
 
@@ -132,7 +132,7 @@ systemctl restart redis
 
 # NGINX
 
-sudo apt-get install nginx -y
+apt-get install nginx -y
 
 # SPHINX SEARCH
 
@@ -161,14 +161,6 @@ LOGIN: $USER_NAME
 PASSWORD: $DEPLOYER_PASSWORD
 "  >> $HOME_PATH/credentials.txt
 
-echo "--------------------------------------------------" >> $HOME_PATH/credentials.txt
-echo "SERVER IP ADDRESS PARAMS"                           >> $HOME_PATH/credentials.txt
-echo "--------------------------------------------------" >> $HOME_PATH/credentials.txt
-
-echo "" >> $HOME_PATH/credentials.txt
-
-ifconfig eth0 | grep inet | awk "{print $2}" | sed "s/addr://" >> $HOME_PATH/credentials.txt
-
 cat $HOME_PATH/credentials.txt
 
 {% endhighlight %}
@@ -189,7 +181,7 @@ group :development do
 end
 {% endhighlight %}
 
-Запускаем комманду <code>cap install</code>, это создаст файлы:
+Запускаем команду <code>cap install</code>, это создаст файлы:
 
 <code>config/deploy.rb</code>
 <code>config/deploy/staging.rb</code>
@@ -341,7 +333,7 @@ end
 
 {% endhighlight %}
 
-В файле <code>config/deploy/production.rb</code> указываем сервер, путь к rsa ключу для подключения и остальные параметры:
+В файле <code>config/deploy/production.rb</code> указываем сервер, путь к rsa ключу и остальные параметры:
 
 {% highlight ruby %}
 
@@ -374,10 +366,10 @@ set :sidekiq_options_per_process, ["--queue default --queue mailers"]
 
 {% endhighlight %}
 
-После настройки параметров можно пробовать деплоить приложение.
+После настройки параметров можно попробовать задеплоить приложение.
 
-Для этого, коммитим изменения на github:
-{% highlight bash %}
+Для этого, комитим изменения и отправляем на github:
+{% highlight shell %}
 git add .
 git commit -am "Name commit"
 git push
@@ -387,15 +379,31 @@ git push
 cap production deploy:initial
 {% endhighlight %}
 
-Если появляются ошибки исправляем, коммитим изменения и пробуем заново.
+Если появляются ошибки исправляем, комитим изменения и пробуем заново.
+
+После первого комита нужно будет создать некоторые файлы вручную, это общие файлы конфигурации указаные в <code>:linked_files</code>:
+
+<code>config/database.yml</code>
+<code>config/private_pub.yml</code>
+<code>config/private_pub_puma.rb</code>
+<code>.env</code>
+
+Файлы нужно поместить в папку <code>shared</code> в папке деплоя путь к которой задан в конфиге <code>set :deploy_to</code>
+
+Есть возможность настроить конфиг <code>Puma</code> и <code>Nginx</code>, для этого нужно выгрузить конфиги:
+
+<code>cap puma:config</code>
+<code>cap puma:nginx_config</code>
+
+и отредактировать их.
 
 ## Настраиваем конфигурацию monit
 
-После успешного деплоя, для тконтроля и управления сервисами можно использовать <code>monit</code>.
+После успешного деплоя, для контроля и управления сервисами можно использовать <code>monit</code>.
 
 Создаем конфиг <code>monit</code>, добавляем нужные сервисы:
 
-{% highlight bash %}
+{% highlight shell %}
 ### Unicorn ###
 check process unicorn
   with pidfile "/home/deployer/qna/current/tmp/pids/unicorn.pid"
@@ -511,9 +519,9 @@ check process private_pub
 
 <code>sudo monit reload</code>
 
-по умолчанию веб-интерфейс отключен, включем в конфиге <code>/etc/monit/monitrc</code>, раскоментировав нужные строки:
+по умолчанию веб-интерфейс отключен, включаем в конфиге <code>/etc/monit/monitrc</code>, раскомментировав нужные строки:
 
-{% highlight bash %}
+{% highlight shell %}
 set httpd port 2812 and                                                     
 #     use address localhost  # only accept connection from localhost        
 #     allow localhost        # allow localhost to connect to the server and 
@@ -523,10 +531,10 @@ set httpd port 2812 and
 
 ## Особенности деплоя на другие VPS серверы
 
-У Digital Ocean и других VPS, процесс ничем не отличается, но скорее всего потребуется создать пользователя для деплоя, так как изначально дается рутовый доступ по SSH, а это не очень хорошо.
+У Digital Ocean и других VPS, процесс деплоя ничем не отличается, но скорее всего потребуется создать пользователя для деплоя, так как изначально дается рутовый доступ по SSH, а это не очень хорошо.
 
 После создания пользователя нужно создать RSA ключ и настроить доступ по SSH для этого пользователя с использованием ключа и отключить доступ для root пользователя.
 
-Есть еще популярный вариант, это использовать при разработке и деплое <code>Docker</code>, об этом напишу в другой раз.
+Есть еще один интересный вариант деполоя, это <code>Docker</code>, который используется и при разработке и при деплое, об этом напишу в другой раз.
 
 
