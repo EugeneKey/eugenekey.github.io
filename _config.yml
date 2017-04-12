@@ -41,6 +41,56 @@ links:
     url: /tags
 # projects in header index
 projects:
+  - name: Sharetribe - improvements for marketplace
+    anchor: share
+    url: https://github.com/EugeneKey/sharetribe
+    description: "
+    Some improvements for marketplace Sharetribe
+        1. Added JS gallery for products, with images full screen magnification
+        2. Added the integration with PayPal (the credentials for the test are sent on request)
+        3. DelayedJob is replaced with ActiveJob using Sidekiq
+        4. It is configured to use Nginx as the frontend and statics server, and Puma as the backend application server
+        5. To store the images using Amazon S3"
+    livedemo: http://sharetribe.evolan.net
+    back: [ Ruby on Rails 4.2.7, MySQL, Redis, Shpinx, Puma, Sidekiq ]
+    front: [ React, jQuery, CoffeeScript, SCSS, Haml, Erb, JavaScript with Babel ES6 ]
+    technologies: [
+    PayPal intergration,
+    Background Jobs with ActiveJob and Sidekiq,
+    File Upload with Paperclip on Amazon S3,
+    React on Rails
+    ]
+    gems: [
+            rails 4.2.7,
+            will_paginate,
+            paperclip,
+            delayed_paperclip,
+            aws-sdk,
+            mysql2,
+            paypal-sdk-permissions,
+            paypal-sdk-merchant,
+            redis,
+            thinking-sphinx,
+            puma,
+            capistrano,
+            devise,
+            oauth2,
+            omniauth-facebook,
+            rails-i18n,
+            mercury-rails,
+            react_on_rails,
+            sidekiq,
+            haml,
+            sass,
+            faraday,
+            zeus,
+            rspec-rails,
+            factory_girl_rails,
+            rubocop,
+            capybara,
+            cucumber-rails,
+            selenium-webdriver
+          ]
   - name: QnA - simple Stack Overflow
     anchor: qna
     url: https://github.com/EugeneKey/QnA

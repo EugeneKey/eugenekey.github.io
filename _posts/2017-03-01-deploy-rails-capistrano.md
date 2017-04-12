@@ -392,8 +392,11 @@ cap production deploy:initial
 
 Есть возможность настроить конфиг <code>Puma</code> и <code>Nginx</code>, для этого нужно выгрузить конфиги:
 
-<code>cap puma:config</code>
-<code>cap puma:nginx_config</code>
+<code>rails g capistrano:nginx_puma:config</code>
+
+А потом залить их на сервер:
+<code>cap production puma:config</code>
+<code>cap production puma:nginx_config</code>
 
 и отредактировать их.
 
